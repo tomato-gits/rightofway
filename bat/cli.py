@@ -7,6 +7,7 @@ from bat.conf import get_config
 
 from bat.server import server_parser
 from bat.example.cli import example_cli
+from bat.rightofway.cli import rightofway_cli
 from bat.logconf import logging_config
 from bat.lib import hello_world
 
@@ -112,6 +113,12 @@ def argparser():
         parents=[example_cli()],
     )
 
+    commands.add_parser(
+        'rightofway',
+        help='right-of-way module commands',
+        add_help=False,
+        parents=[rightofway_cli()],
+    )
     testing_cli(commands)
 
     return p
