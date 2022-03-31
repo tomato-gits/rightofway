@@ -18,6 +18,19 @@ def rightofway_cli() -> argparse.ArgumentParser:
     ## set default to show help fx if no args given
     rightofway.set_defaults(func=Commands.default)
     
+    # Required arguments
+    rightofway.add_argument(
+        dest='party_a',
+        default=0,
+        help='Number of members in party A',
+    )
+
+    rightofway.add_argument(
+        dest='party_b',
+        default=0,
+        help='Number of members in party B',
+    )
+
     # Add additional sub-commands to this cli
     commands = rightofway.add_subparsers(
         dest='rightofway.cmds',
@@ -25,13 +38,13 @@ def rightofway_cli() -> argparse.ArgumentParser:
         description='for additonal details on each command use: '
         '"bat rightofway x {command name} --help"',
     )
-    
+
     report = commands.add_parser(
         'report',
         help='some kind of help should be here...',
         description='reports which group has right of way',
     )
-    
+
     report.set_defaults(func=Commands.report)
     
     return rightofway
@@ -45,5 +58,7 @@ class Commands:
     
     @staticmethod
     def report(conf) -> None:
-        print(report_row())
+        A = conf.party_a
+        B = conf.party_b
+        print(report_row(A, B))
         # print(conf.__dict__)
