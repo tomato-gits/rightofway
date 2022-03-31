@@ -11,7 +11,7 @@ def get_help(parser: argparse.ArgumentParser) -> Callable[[Configuration], None]
     return help
 
 
-def example_cli():
+def example_cli() -> argparse.ArgumentParser:
     example = argparse.ArgumentParser(
         prog='example',
         formatter_class=argparse.RawDescriptionHelpFormatter,
